@@ -1,0 +1,1 @@
+g++ -m32 -ldl -g -Wall -fPIC -ldl -rdynamic -lstdc++ -std=c++0x src/*  -I./includes -o updater
