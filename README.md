@@ -39,5 +39,5 @@ Todo
 - Add command line support for manual requests
 - Update notifications & custom script execution when app update or file sync is starting, in progress and finished
 - Add Bash script execution support for game updaters
-- Give me feature requests if you want something to be added.
+- Send me feature requests if you want something to be added.
 
