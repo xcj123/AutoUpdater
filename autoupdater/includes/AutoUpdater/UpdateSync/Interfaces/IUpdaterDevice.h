@@ -8,6 +8,7 @@ class IUpdaterDevice
 public:
 	virtual void OnLoad() = 0;
 	virtual void OnUnload() = 0;
+	virtual void initApp(char *szAppName, Json *appConfig) = 0;
 	virtual bool needUpdate(char *szAppName, char *szDownloadDirectory, Json *appConfig) = 0;
 	virtual bool Update(char *szAppName, char *szDownloadDirectory, Json *appConfig, bool validate) = 0;
 };

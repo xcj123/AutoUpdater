@@ -3,6 +3,7 @@
 
 #include <Utils/EasyJson.h>
 #include <UpdateSync/Interfaces/IUpdaterDevice.h>
+#include <EasyHttp/EasyHttp.h>
 
 class CUpdaterDevice : public IUpdaterDevice
 {
@@ -10,7 +11,10 @@ class CUpdaterDevice : public IUpdaterDevice
 public:
 	virtual void OnLoad();
 	virtual void OnUnload();
+	virtual void initApp(char *szAppName, Json *appConfig);
 	virtual bool needUpdate(char *szAppName, char *szDownloadDirectory, Json *appConfig);
+	int getVersion(int iAppID);
+	int getCurrentVersion(char *szAppName);
 	virtual bool Update(char *szAppName, char *szDownloadDirectory, Json *appConfig, bool validate);
 };
 #endif

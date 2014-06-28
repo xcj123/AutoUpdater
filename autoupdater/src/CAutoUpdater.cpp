@@ -71,6 +71,14 @@ CAutoUpdater::CAutoUpdater()
 				WARNING("Application %s has no config file", apps[i].szFileName);
 				continue;
 			}
+			PRINT("Initializing app");
+			Json *pAppConfig = m_pAppStorage->getConfig(apps[i].szFileName);
+			std::string szDeviceName = pAppConfig->getString("device");
+			struct CTrie<IUpdaterDevice*>::Node *m_pDevice = m_hUpdaterDevices.findNode(szDeviceName.c_str());
+			if (m_pDevice != NULL)
+			{
+				m_pDevice->value->initApp(apps[i].szFileName, pAppConfig);
+			}
 		}
 	}
 }
@@ -113,43 +121,46 @@ void CAutoUpdater::Start()
 						// TODO SEND ALERT NOTIFICATION TO THE OPERATOR SOMEHOW? 
 						continue;
 					}
-				}
-				char szStorageDirectory[512];
-				sprintf(szStorageDirectory, "download/%s", szAppName);
-				CFileStorage storage(szStorageDirectory);
-				unsigned int exploredFiles = storage.Explore();
-				GOOD("Found %d files", exploredFiles);
-				CFile file;
-				std::string szSyncFile = pAppConfig->getString("synclist");
-				file.open(szSyncFile.c_str());
-				if (!file.isOpen())
-				{
-					WARNING("Failed to '%s' sync file", szSyncFile.c_str());
-					continue;
-				}
-				char szLine[512];
-				while (file.getLine(szLine, 512) > 0)
-				{
 
-					PRINT("Syncronizing: %s", szLine);
-					unsigned int updatedFiles = storage.Sync(szLine);
-
-
-					if (updatedFiles > 0)
+					char szStorageDirectory[512];
+					sprintf(szStorageDirectory, "download/%s", szAppName);
+					CFileStorage storage(szStorageDirectory);
+					unsigned int exploredFiles = storage.Explore();
+					GOOD("Found %d files", exploredFiles);
+					CFile file;
+					std::string szSyncFile = pAppConfig->getString("synclist");
+					file.open(szSyncFile.c_str());
+					if (!file.isOpen())
 					{
-						GOOD("%d files were updated", updatedFiles);
+						WARNING("Failed to '%s' sync file", szSyncFile.c_str());
+						continue;
 					}
-					else{
-						GOOD("%s is already up to date", szLine);
+					char szLine[512];
+					while (file.getLine(szLine, 512) > 0)
+					{
+
+						PRINT("Syncronizing: %s", szLine);
+						unsigned int updatedFiles = storage.Sync(szLine);
+
+
+						if (updatedFiles > 0)
+						{
+							GOOD("%d files were updated", updatedFiles);
+						}
+						else{
+							GOOD("%s is already up to date", szLine);
+						}
 					}
+					file.close();
 				}
-				file.close();
-				
+				else{
+					GOOD("%s is up to date.", szAppName);
+				}
 			}
 		}
 		
 #ifdef _WIN32
-		Sleep(6000);
+		Sleep(60000);
 #else
 		sleep(60);
 #endif

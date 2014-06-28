@@ -28,11 +28,12 @@ CAppStorage::CAppStorage(char *szFileName)
 	
 }
 
-bool CAppStorage::hasConfig(const char *szAppName)
+Json *CAppStorage::getConfig(const char *szAppName)
 {
-	if (!m_pApps.findNode(szAppName))
-		return false;
-	return true;
+	CTrie<Json*>::Node *m_pNode = m_pApps.findNode(szAppName);
+	if (!m_pNode)
+		return NULL;
+	return m_pNode->value;
 }
 
 CAppStorage::~CAppStorage()

@@ -14,8 +14,12 @@ public:
 	~CAppStorage();
 	
 	unsigned int getVersion(const char *szAppName);
-	bool hasConfig(const char *szAppName);
-
+	bool hasConfig(const char *szAppName){
+		if (!this->getConfig(szAppName))
+			return false;
+		return true;
+	}
+	Json *getConfig(const char *szAppName);
 	CTrie<Json*> *getApps() {
 		return &m_pApps;
 	};
