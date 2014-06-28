@@ -15,7 +15,6 @@ Example:
 	"app_set_config":	"0", // its for gold source games
 	"mod":		"0" // again for gold source games
 }
-	
 
 Main Features
 ========
