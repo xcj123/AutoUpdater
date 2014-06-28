@@ -5,7 +5,7 @@ It is a simple automatic updater and file synronizer for game servers.
 
 
 Example:
-========
+```
 "tf2_srv": // Custom name (The download directory name will be the same)
 {
 	"device":	"steamcmd", // The updater you want to use
@@ -16,7 +16,7 @@ Example:
 	"login":	"anonymous", // Steamcmd login name and password
 	"app_set_config":	"0", // its for gold source games
 	"mod":		"0" // again for gold source games
-}
+}```
 
 Main Features
 ========
