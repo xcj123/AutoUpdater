@@ -2,8 +2,10 @@ AutoUpdater
 ===========
 It is a simple automatic updater and file synronizer for game servers.
 - cfg/apps.cfg - put the apps here you want to keep updated. The format is json.
-Example:
 
+
+Example:
+========
 "tf2_srv": // Custom name (The download directory name will be the same)
 {
 	"device":	"steamcmd", // The updater you want to use
