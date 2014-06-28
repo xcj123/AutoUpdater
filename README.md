@@ -34,6 +34,8 @@ Support
 Todo
 ========
 - Fix Socket/HTTP delay
+- Add Logging
+- Add immediate report on failure
 - Add command line support for manual requests
 - Update notifications & custom script execution when app update or file sync is starting, in progress and finished
 - Give me feature requests if you want something to be added.
