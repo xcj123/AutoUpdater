@@ -35,8 +35,6 @@ Todo
 ========
 - Fix Socket/HTTP delay
 - Add command line support for manual requests
-- Update notifications & custom script execution:
-⋅⋅⋅when app update is starting, in progress and finished
-⋅⋅⋅when file sync starting, in progress and finished
+- Update notifications & custom script execution when app update or file sync is starting, in progress and finished
 - Give me feature requests if you want something to be added.
 
